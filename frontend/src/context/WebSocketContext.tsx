@@ -33,7 +33,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       socketRef.current.close()
     }
 
-    const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
+    const apiBaseUrl = (import.meta.env.VITE_API_URL || window.location.origin).trim()
     const wsHost = apiBaseUrl.replace(/^https?:\/\//, '')
     const isLocalhost = wsHost.includes('localhost') || wsHost.includes('127.0.0.1')
     const protocol = isLocalhost ? 'ws:' : 'wss:'
