@@ -24,7 +24,7 @@ export default function StudentBonafide() {
 
   const createMutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post('/api/v1/student/bonafide', data)
+      const response = await api.post('/api/v1/student/bonafides', data)
       return response.data
     },
     onSuccess: () => {

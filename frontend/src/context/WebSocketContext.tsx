@@ -33,8 +33,9 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       socketRef.current.close()
     }
 
-    const wsHost = window.location.host
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
+    const wsHost = apiBaseUrl.replace(/^https?:\/\//, '')
+    const protocol = apiBaseUrl.startsWith('https') ? 'wss:' : 'ws:'
     const defaultWsUrl = `${protocol}//${wsHost}/ws/notifications?token=${token}`
     
     // If VITE_WS_URL is provided, use it (e.g., ws://localhost:8000/ws/notifications). Otherwise use defaultWsUrl.
