@@ -1,0 +1,47 @@
+services:
+  postgres:
+    ports: []
+    networks:
+      - campus_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis:
+    ports: []
+    networks:
+      - campus_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  backend:
+    ports: []
+    env_file:
+      - ./backend/.env.production
+    networks:
+      - campus_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  frontend:
+    ports:
+      - "80:80"
+    networks:
+      - campus_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  campus_net:
+    driver: bridge
