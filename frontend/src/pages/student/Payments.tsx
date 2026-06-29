@@ -8,7 +8,9 @@ import { StatusBadge, DataTable, SkeletonPage } from '../../components/ui'
 
 async function downloadReceipt(url: string, filename: string) {
   const token = localStorage.getItem('access_token')
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } })
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
+  const res = await fetch(fullUrl, { headers: { Authorization: `Bearer ${token}` } })
   if (!res.ok) { toast.error('Failed to download receipt'); return }
   const blob = await res.blob()
   const a = document.createElement('a')
