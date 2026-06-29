@@ -38,7 +38,7 @@ app.mount(f"/{settings.UPLOAD_DIR}", StaticFiles(directory=settings.UPLOAD_DIR),
 
 # ── Security Middleware ───────────────────────────────────────────────────────
 allowed_hosts = ["localhost", "127.0.0.1", "*"] if settings.DEBUG_MODE else [
-    settings.FRONTEND_URL.replace("http://", "").replace("https://", "").split("/")[0],
+    "*",
     "localhost",
 ]
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
